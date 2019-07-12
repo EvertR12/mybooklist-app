@@ -67,6 +67,18 @@ class UI {
 }
 
 // Store Class: Handles Storage
+class Store {
+    static getBooks(){
+        let books;
+        if(localStorage.getItem('books') === null){
+            books = [];
+        } else {
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+
+        return books;
+    }
+}
 
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
@@ -82,7 +94,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     const isbn = document.querySelector('#isbn').value;
 
     if(title === '' || author === '' || isbn === ''){
-        UI.showAlert('Please fill in all the fields','danger');
+        UI.showAlert('Please fill in all the fields','warning');
     } else {
         //Instantiate book
         const book = new Book(title, author, isbn);
@@ -102,4 +114,6 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 document.querySelector('#book-list').addEventListener('click', 
     (e) => {
         UI.deleteBook(e.target);
+        //Show message when delete a item
+        UI.showAlert('Book Removed', 'danger');
     });
