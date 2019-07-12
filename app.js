@@ -10,19 +10,6 @@ class Book{
 // UI Class: Handle UI Tasks
 class UI {
     static displayBooks(){
-        const StoredBooks = [
-            {
-                title: 'Book One',
-                author: 'John Doe',
-                isbn: '3434434'
-            },
-            {
-                title: 'Book Two',
-                author: 'Jane Doe',
-                isbn: '4545545'
-            }
-        ];
-
     const books = StoredBooks;
 
     books.forEach((book) => UI.addBookToList(book));
@@ -79,9 +66,21 @@ class Store {
         return books;
     }
 
-    static addBooks(book){
+    static addBook(book){
         const books = Store.getBooks();
         books.push(book);
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+
+    static removeBook(book){
+        const book = Store.getBooks();
+
+        books.forEach((book, index) => {
+            if(books.isbn === isbn){
+                books.splice(index, 1);
+            }
+        });
+
         localStorage.setItem('books', JSON.stringify(books));
     }
 }
